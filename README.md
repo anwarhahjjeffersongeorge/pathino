@@ -24,40 +24,41 @@ This package exports five functions:
 
 ### `dotParse`
 Parse a dot notated path, remove whitespace-only path elements  
-Argument     | Type                     | Required | Description
------------- | ------------------------ | -------- | -----------
-`path`       | `String`                 | Yes      |  The dot path to parse
+
+Argument     | Type                     | Required | Description  
+------------ | ------------------------ | -------- | -----------  
+`path`       | `String`                 | Yes      |  The dot path to parse  
 
 ### `getPathInO` 
-Deep find element in an object by path elements p, returning undefined if the path or element at the path was undefined
-Argument     | Type                     | Required | Description
------------- | ------------------------ | -------- | -----------
-`original`   | `Object`                 | No       |  The object
-`...paths`   | `Arguments`              | Yes      | The path strings/symbols 
+Deep find element in an object by path elements p, returning undefined if the path or element at the path was undefined  
+Argument     | Type                     | Required | Description  
+------------ | ------------------------ | -------- | -----------  
+`original`   | `Object`                 | No       |  The object  
+`...paths`   | `Arguments`              | Yes      | The path strings/symbols  
 
 ### `dotGetPathInO`
-Deep find something in an object using dot-notation formatted path string
-Argument        | Type              | Required | Description
---------------- | ----------------- | -------- | -----------
-`original`      | `Object`          | No       |  The object
-`pathstring`    | `String`          | Yes      |  The dot-notated path string
+Deep find something in an object using dot-notation formatted path string  
+Argument        | Type              | Required | Description  
+--------------- | ----------------- | -------- | -----------  
+`original`      | `Object`          | No       |  The object  
+`pathstring`    | `String`          | Yes      |  The dot-notated path string  
 
 
 ### `putPathInO`
 Deep put something in an object by path elements p, creating tree as needed, using Object.assign
-Argument     | Type              | Required | Description
------------- | ----------------- | -------- | -----------
-`original`   | `Object`          | No       |  The object
-`value`      | `Any`             | Yes      |  The new element
-`...paths`   | `Arguments`       | Yes      | The path strings/symbols 
+Argument     | Type              | Required | Description  
+------------ | ----------------- | -------- | -----------  
+`original`   | `Object`          | No       |  The object  
+`value`      | `Any`             | Yes      |  The new element  
+`...paths`   | `Arguments`       | Yes      | The path strings/symbols   
 
-### `dotPutPathInO`
+### `dotPutPathInO`  
 Deep put something in an object using dot-notation formatted path string and Object.assign
-Argument     | Type           | Required | Description
------------- | ---------------| -------- | -----------
-`original`   | `Object`       | No       |  The object
-`value`      | `Any`          | Yes      |  The new element
-`pathstring` | `String`       | Yes      | The dot-notated path strings
+Argument     | Type           | Required | Description  
+------------ | ---------------| -------- | -----------  
+`original`   | `Object`       | No       |  The object  
+`value`      | `Any`          | Yes      |  The new element  
+`pathstring` | `String`       | Yes      | The dot-notated path strings  
 
 
 ## Testing
