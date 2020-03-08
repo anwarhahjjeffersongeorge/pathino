@@ -31,7 +31,8 @@ Argument     | Type                     | Required | Description
 
 ### `getPathInO` 
 
-Deep find element in an object by path elements p, returning undefined if the path or element at the path was undefined
+Deep find element in an object by path elements p, returning undefined if the path or element at the path was undefined  
+
 Argument     | Type                     | Required | Description
 ------------ | ------------------------ | -------- | -----------
 `original`   | `Object`                 | No       |  The object
