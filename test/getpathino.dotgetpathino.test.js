@@ -36,7 +36,8 @@ test('Find elements correctly by path using strings and symbols', t => {
   )
   t.is(
     dotGetPathInO(object, 'a.b.c.d.target'),
-    targets.d, 'Gets a specified target from the object using one path string argument'
+    targets.d,
+    'Gets a specified target from the object using one path string argument'
   )
   t.deepEqual(
     dotGetPathInO(object, 'a.b.c'),
