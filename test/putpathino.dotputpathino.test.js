@@ -125,3 +125,16 @@ test(
     dotPutF: dotPutPathInO
   }
 )
+
+function macro2(t, badType) {
+  const paths = ['some', 'dump', 'of', 'a', 'place']
+  const f = () => putPathInO(undefined, 33, paths)
+  t.notThrows(f, `Does not throw TypeError on ${badType}`)
+  
+  const dotpath = paths.join('.')
+  const f2 = () => dotPutPathInO(undefined, 33, dotpath)
+  t.notThrows(f, `Does not throw TypeError on ${badType}`)
+}
+
+test('Handles undefined object argument gracefully', macro2, undefined)
+test('Handles null object argument gracefully', macro2, null)

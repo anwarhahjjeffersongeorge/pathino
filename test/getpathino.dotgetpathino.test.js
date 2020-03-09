@@ -66,3 +66,47 @@ test('Find elements correctly by path using strings and symbols', t => {
     'Gets a specified target from the object by path arguments with symbols'
   )
 })
+
+function macro2(t, badType) {
+  const paths = ['some', 'dump', 'of', 'a', 'place']
+  const f = () => getPathInO(undefined, paths)
+  t.notThrows(f, `Does not throw TypeError on ${badType}`)
+
+  const dotpath = paths.join('.')
+  const f2 = () => dotGetPathInO(undefined, dotpath)
+  t.notThrows(f2, `Does not throw TypeError on ${badType}`)
+}
+
+test('Handles undefined object argument gracefully', macro2, undefined)
+test('Handles null object argument gracefully', macro2, null)
+
+function macro3(t, irregularPathElement) {
+  const target = 32323 * 23232
+  const object = {
+    some: {
+      [irregularPathElement]: {
+        of: {
+          a: {
+            place: target
+          }
+        }
+      }
+    }
+  }
+  const paths = ['some', irregularPathElement, 'of', 'a', 'place']
+  t.is(
+    getPathInO(object, ...paths),
+    target, 
+    `Found specified target with ${irregularPathElement} in path`
+  )
+  
+  const partpaths = ['some', irregularPathElement]
+  t.deepEqual(
+    getPathInO(object, ...partpaths),
+    object.some[irregularPathElement],
+    `Found specified target on path ending at ${irregularPathElement}`
+  )
+}
+
+test('Handles undefined element in path correctly', macro3, undefined)
+test('Handles null element in path correctly', macro3, null)
