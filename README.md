@@ -29,11 +29,11 @@ Argument     | Type                     | Required | Description
 ------------ | ------------------------ | -------- | -----------
 `path`       | `String`                 | No*     |  The dot path to parse
 
-* `dotParse` won't throw without `path`, but it won't return anythin useful either.
+* `dotParse` won't throw without `path`, but it won't return anything useful either.
 
 ### `getPathInO` 
 
-Deep find element in an object by path elements p, returning undefined if the path or element at the path was undefined  
+Deep find element in an object by path elements p, returning undefined if the path or element at the path was undefined. 
 
 Argument     | Type                     | Required | Description
 ------------ | ------------------------ | -------- | -----------
