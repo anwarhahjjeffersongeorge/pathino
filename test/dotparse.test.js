@@ -15,3 +15,9 @@ test('Correctly separates dot-paths', t => {
     'Separates characters between dots, removing white-space only path elements'
   )
 })
+
+test('Handles nonexistent path failing gracefully', t => {
+  const path = undefined
+  const f = () => dotParse(path)
+  t.notThrows(f, 'Does not throw')
+})

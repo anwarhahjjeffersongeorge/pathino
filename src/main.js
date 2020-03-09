@@ -1,5 +1,5 @@
 // Parse a dot notated path, remove spaces
-const dotParse = path => path.split(/\./).filter(substring => substring)
+const dotParse = (path = '') => path.split(/\./).filter(substring => substring)
 
 // Deep find element in an object by path elements p, returning undefined if the path or element at the path was undefined
 const getPathInO = (original = {}, ...paths) =>

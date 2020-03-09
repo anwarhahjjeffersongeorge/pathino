@@ -27,7 +27,9 @@ Parse a dot notated path, remove whitespace-only path elements
 
 Argument     | Type                     | Required | Description
 ------------ | ------------------------ | -------- | -----------
-`path`       | `String`                 | Yes      |  The dot path to parse
+`path`       | `String`                 | No*     |  The dot path to parse
+
+* `dotParse` won't throw without `path`, but it won't return anythin useful either.
 
 ### `getPathInO` 
 
