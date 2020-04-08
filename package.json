@@ -5,7 +5,7 @@
   },
   "description": "Get and put element E at path P in object O.",
   "devDependencies": {
-    "ava": "^3.5.0",
+    "ava": "^3.5.2",
     "babel-eslint": "^10.1.0",
     "codecov": "^3.6.5",
     "cross-env": "^7.0.2",
