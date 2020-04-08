@@ -130,7 +130,7 @@ function macro2(t, badType) {
   const paths = ['some', 'dump', 'of', 'a', 'place']
   const f = () => putPathInO(undefined, 33, paths)
   t.notThrows(f, `Does not throw TypeError on ${badType}`)
-  
+
   const dotpath = paths.join('.')
   const f2 = () => dotPutPathInO(undefined, 33, dotpath)
   t.notThrows(f, `Does not throw TypeError on ${badType}`)
@@ -138,3 +138,46 @@ function macro2(t, badType) {
 
 test('Handles undefined object argument gracefully', macro2, undefined)
 test('Handles null object argument gracefully', macro2, null)
+
+test('Handles circular reference in object correctly without throwing', t => {
+  const targets = {
+    a: Symbol('a'),
+    b: Symbol('b'),
+    c: Symbol('c'),
+    d: Symbol('d'),
+    e: Symbol('e')
+  }
+
+  const object = {
+    a: {
+      target: targets.a,
+      b: {
+        target: targets.b,
+        c: {
+          target: targets.c,
+          d: {
+            target: targets.d
+          }
+        }
+      }
+    }
+  }
+  object.a.f = object
+  // console.log(object.a.f === object)
+  const circularTest0 = () => {
+    putPathInO(object, targets.e, 'a', 'f', 'a', 'b', 'target')
+  }
+  t.notThrows(circularTest0, 'does not throw when placing into circuar reference')
+  t.is(object.a.f.a.b.target, targets.e, 'placed into circular reference correctly')
+  t.is(object.a.b.target, object.a.f.a.b.target, 'maintained circular reference correctly')
+
+  const circularTest1 = () => {
+    putPathInO(object, targets.e, 'a', 'f', 'a', 'f')
+  }
+  const overriddenTest = () => {
+    return object.a.f.a.f
+  }
+  t.notThrows(circularTest1, 'does not throw when overriding circuar reference')
+  t.is(object.a.f, targets.e, 'placed circular reference correctly')
+  t.throws(overriddenTest, {instanceOf: TypeError}, "overwriting key in sub object overwrites original reference")
+})

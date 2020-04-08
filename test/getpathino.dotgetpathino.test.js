@@ -96,10 +96,10 @@ function macro3(t, irregularPathElement) {
   const paths = ['some', irregularPathElement, 'of', 'a', 'place']
   t.is(
     getPathInO(object, ...paths),
-    target, 
+    target,
     `Found specified target with ${irregularPathElement} in path`
   )
-  
+
   const partpaths = ['some', irregularPathElement]
   t.deepEqual(
     getPathInO(object, ...partpaths),
@@ -110,3 +110,40 @@ function macro3(t, irregularPathElement) {
 
 test('Handles undefined element in path correctly', macro3, undefined)
 test('Handles null element in path correctly', macro3, null)
+
+test('Handles circular reference in object correctly without throwing', t => {
+  const targets = {
+    a: Symbol('a'),
+    b: Symbol('b'),
+    c: Symbol('c'),
+    d: Symbol('d')
+  }
+
+  const object = {
+    a: {
+      target: targets.a,
+      b: {
+        target: targets.b,
+        c: {
+          target: targets.c,
+          d: {
+            target: targets.d
+          }
+        }
+      }
+    }
+  }
+  object.a.f = object
+  // console.log(object.a.f === object)
+  let circularResult
+  const circularTest = () => {
+    circularResult = getPathInO(object, 'a', 'f', 'a', 'f')
+  }
+  t.notThrows(circularTest, 'does not throw with circuar reference')
+  t.is(circularResult, object, 'found circular reference correctly')
+  t.is(
+    getPathInO(object, 'a', 'f', 'a', 'b', 'target'),
+    targets.b,
+    'traverses circular reference to target correctly'
+  )
+})
