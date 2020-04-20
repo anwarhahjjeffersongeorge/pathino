@@ -1,6 +1,6 @@
 'use strict'
 import test from 'ava'
-import {putPathInO, dotPutPathInO} from '..'
+import {putPathInO, dotPutPathInO, putPat, dotPut} from '..'
 
 const targets = {
   a: Symbol('a'),

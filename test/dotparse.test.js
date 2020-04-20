@@ -16,8 +16,23 @@ test('Correctly separates dot-paths', t => {
   )
 })
 
-test('Handles nonexistent path failing gracefully', t => {
-  const path = undefined
-  const f = () => dotParse(path)
-  t.notThrows(f, 'Does not throw')
-})
+function pathTests (t, fixtures, expected) {
+  for (const path of fixtures){
+    let r
+    const f = () => {
+      r = dotParse(path)
+    }
+    t.notThrows(f, 'Does not throw')
+    // t.log(r, path, expected)
+    t.is(r, expected, 'returns null')
+  }
+}
+
+test('Handles bad paths with null', pathTests, [
+  undefined,
+  null,
+  33,
+  '',
+  [],
+  {},
+], null)

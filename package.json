@@ -1,6 +1,7 @@
 {
   "author": "Anwar Hahj Jefferson-George <anwarhahjjeffersongeorge@gmail.com>",
   "dependencies": {
+    "camelcut": "^0.1.0",
     "esm": "^3.2.25"
   },
   "description": "Get and put element E at path P in object O.",
